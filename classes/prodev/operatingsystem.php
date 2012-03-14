@@ -46,7 +46,7 @@ class ProDev_OperatingSystem extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		$response = $api->_getRequest('services/type/os');
+		$response = $api->getRequest('services/type/os');
 		
 		$types = array();
 		foreach ($response->osTypes as $os)

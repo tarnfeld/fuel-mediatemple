@@ -57,8 +57,8 @@ class ProDev
 	{
 		if (!self::$apikey)
 		{
-			\Config::load('prodev', 'prodev');
-			if (!$api_key = \Config::get('prodev.apikey'))
+			\Config::load('mediatemple', 'mt');
+			if (!$api_key = \Config::get('mt.apikey'))
 			{
 				throw new ProDev_Exception('No API key set in config');
 			}
@@ -87,7 +87,7 @@ class ProDev
 			$params['primaryDomain'] = $primary_domain;
 		}
 		
-		return $this->_postRequest('service', $params);
+		return $this->postRequest('service', $params);
 	}
 	
 	/**
@@ -96,9 +96,9 @@ class ProDev
 	 * @param string $path API Path (eg services/{serviceId}/firewall/flush)
 	 * @return array $response
 	 */
-	public function _getRequest($path)
+	public function getRequest($path)
 	{
-		$r = $this->_curlRequest('GET', $this->api_url() . '/' . $path);
+		$r = $this->_curlRequest('GET', $this->_api_url() . '/' . $path);
 		
 		return $r['body'];
 	}
@@ -110,9 +110,9 @@ class ProDev
 	 * @param array $body
 	 * @return array $response
 	 */
-	public function _postRequest($path, $body = array())
+	public function postRequest($path, $body = array())
 	{
-		$response = $this->_curlRequest('POST', $this->api_url() . '/' . $path, $body);
+		$response = $this->_curlRequest('POST', $this->_api_url() . '/' . $path, $body);
 		
 		return $this->_parseStandardResponse($response['body'], $response['status']);
 	}
@@ -126,7 +126,7 @@ class ProDev
 	 */
 	public function _putRequest($path, array $body)
 	{
-		$response = $this->_curlRequest('PUT', $this->api_url() . '/' . $path, $body);
+		$response = $this->_curlRequest('PUT', $this->_api_url() . '/' . $path, $body);
 		
 		return $this->_parseStandardResponse($response['body'], $response['status']);
 	}
@@ -227,7 +227,7 @@ class ProDev
 	 *
 	 * @return string $url
 	 */
-	protected function api_url()
+	protected function _api_url()
 	{
 		return self::ENDPOINT . '/v' . self::VERSION;
 	}

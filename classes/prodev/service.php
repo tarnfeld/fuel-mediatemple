@@ -23,7 +23,7 @@ class ProDev_Service extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		$response = $api->_getRequest('services');
+		$response = $api->getRequest('services');
 		
 		$services = array();
 		foreach($response->services as $service)
@@ -44,7 +44,7 @@ class ProDev_Service extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		return $api->_getRequest('services/ids')->serviceIds;
+		return $api->getRequest('services/ids')->serviceIds;
 	}
 	
 	public function friendlyName()
@@ -66,7 +66,7 @@ class ProDev_Service extends ProDev_Object
 		}
 		
 		$api = new ProDev();
-		$this->_data = (array) $api->_getRequest('services/' . $this->id);
+		$this->_data = (array) $api->getRequest('services/' . $this->id);
 		
 		return $this;
 	}
@@ -100,7 +100,7 @@ class ProDev_Service extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		return $api->_postRequest('services/' . $this->id . '/reboot');
+		return $api->postRequest('services/' . $this->id . '/reboot');
 	}
 
 	/**
@@ -112,7 +112,7 @@ class ProDev_Service extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		return $api->_postRequest('services/' . $this->id . '/disk/temp');
+		return $api->postRequest('services/' . $this->id . '/disk/temp');
 	}
 	
 	/**
@@ -124,7 +124,7 @@ class ProDev_Service extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		return $api->_postRequest('services/' . $this->id . '/firewall/flush');
+		return $api->postRequest('services/' . $this->id . '/firewall/flush');
 	}
 
 	/**
@@ -167,7 +167,7 @@ class ProDev_Service extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		$response = (array) $api->_getRequest('stats/' . $this->id, array(
+		$response = (array) $api->getRequest('stats/' . $this->id, array(
 			'start' => $start,
 			'end' => $end,
 			'resolution' => $resolution,

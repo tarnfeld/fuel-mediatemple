@@ -50,7 +50,7 @@ class ProDev_ServiceType extends ProDev_Object
 	{
 		$api = new ProDev();
 		
-		$response = $api->_getRequest('services/types');
+		$response = $api->getRequest('services/types');
 		
 		$services = array();
 		foreach ($response->serviceTypes as $service)
